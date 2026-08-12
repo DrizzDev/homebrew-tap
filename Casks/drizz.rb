@@ -4,23 +4,23 @@ cask "drizz" do
 
   on_macos do
     on_intel do
-      sha256 "b5ed419b9b32a3aa717678307c464cc7147a7d41b0c8a090a59b707221ad1f80"
-      url "https://github.com/DrizzDev/platform/releases/download/v#{version}/drizz-darwin-amd64.tar.gz"
+      sha256 "4f51f66fac558b919a1297660b0b960472cd85ca605f4e16532cc4c5971e0f12"
+      url "https://github.com/DrizzDev/releases/releases/download/v#{version}/drizz-darwin-amd64.tar.gz"
     end
     on_arm do
-      sha256 "2e1cfb5d34d76ff84a96b5101146ea0ca309e0f774b1e0c563bbc2790045771f"
-      url "https://github.com/DrizzDev/platform/releases/download/v#{version}/drizz-darwin-arm64.tar.gz"
+      sha256 "59afc355d73eae70c220cfc9ade8b66de2d41a3edc06942fd4a1463f4c573988"
+      url "https://github.com/DrizzDev/releases/releases/download/v#{version}/drizz-darwin-arm64.tar.gz"
     end
   end
 
   on_linux do
     on_intel do
-      sha256 "dc6dba17cf94a23aebddb322b9e5c1bea281a0a192e2454a2cae670c4617477e"
-      url "https://github.com/DrizzDev/platform/releases/download/v#{version}/drizz-linux-amd64.tar.gz"
+      sha256 "b8bfcd13c51269eba7f16ebb6000c467f4c5344137bae9f80c9ebf7a32af4e07"
+      url "https://github.com/DrizzDev/releases/releases/download/v#{version}/drizz-linux-amd64.tar.gz"
     end
     on_arm do
-      sha256 "7a80aa6351d81cf079437cae6a634da90bb209e06316c47107cbd788d9420dea"
-      url "https://github.com/DrizzDev/platform/releases/download/v#{version}/drizz-linux-arm64.tar.gz"
+      sha256 "a30b3fdb67e0ecd956ad4db6b732c5cabf29a1a17b447715ea8aa8bb949c417c"
+      url "https://github.com/DrizzDev/releases/releases/download/v#{version}/drizz-linux-arm64.tar.gz"
     end
   end
 
