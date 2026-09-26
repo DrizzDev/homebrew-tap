@@ -6,8 +6,8 @@ class TwinHarness < Formula
   # Assets live in DrizzDev/releases, the same public repo drizz publishes
   # to, so the source repo can stay private. The tag carries the tool name
   # because plain v0.1.x in that repo belongs to drizz.
-  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.1.0/twin_harness-0.1.0.tar.gz"
-  sha256 "74de619cf2899226331b974dcaea5bc20592fad3e58dfb65f2580a1d41bdeb54"
+  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.1.1/twin_harness-0.1.1.tar.gz"
+  sha256 "3703c46c1209aa230fa4e7948870e55ed0aa42807a7bbf2b95bd4177f39247c2"
   # Proprietary: this is distributed to Drizz customers, not published.
   license :cannot_represent
 
