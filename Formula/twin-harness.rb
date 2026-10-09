@@ -6,8 +6,8 @@ class TwinHarness < Formula
   # Assets live in DrizzDev/releases, the same public repo drizz publishes
   # to, so the source repo can stay private. The tag carries the tool name
   # because plain v0.1.x in that repo belongs to drizz.
-  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.1.1/twin_harness-0.1.1.tar.gz"
-  sha256 "3703c46c1209aa230fa4e7948870e55ed0aa42807a7bbf2b95bd4177f39247c2"
+  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.2.0/twin_harness-0.2.0.tar.gz"
+  sha256 "162d559fb98e85fac95ba6921416d2da3914c00c1db83e4d4d006cce7787ffa8"
   # Proprietary: this is distributed to Drizz customers, not published.
   license :cannot_represent
 
@@ -38,8 +38,10 @@ class TwinHarness < Formula
 
         twin-test --init
 
-      This build asks a Drizz grading service for its verdicts and does not
-      carry the grading rules. Set the token you were given:
+      Worlds and the twin's log of every call (`twin world`, the SDK's
+      world.calls()) need only those. PASS/FAIL verdicts come from a Drizz
+      grading service -- this build does not carry the grading rules -- and
+      need the grading token you were given:
 
         export TWIN_GRADE_TOKEN=...
 
