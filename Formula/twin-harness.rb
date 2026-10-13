@@ -6,8 +6,8 @@ class TwinHarness < Formula
   # Assets live in DrizzDev/releases, the same public repo drizz publishes
   # to, so the source repo can stay private. The tag carries the tool name
   # because plain v0.1.x in that repo belongs to drizz.
-  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.5/twin_harness-0.10.5.tar.gz"
-  sha256 "423f32125de3c9fcfd5903cb53dc0fa7c21488a531fe5ed5fd58ac9feeb7bcbc"
+  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.6/twin_harness-0.10.6.tar.gz"
+  sha256 "ebf40cec52c4ae49a318db6ca3c7a392af3a90081806abe99cf96aa67ddc04a9"
   # Business Source License 1.1: LICENSE and NOTICE inside the tarball.
   license "BUSL-1.1"
 
@@ -25,12 +25,13 @@ class TwinHarness < Formula
   depends_on "python@3.14"
 
   resource "twin-core" do
-    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.5/twin_core-0.10.5.tar.gz"
-    sha256 "4e71925c5b719925bbaf01fa195824826864bdac4884e8e13b678daf8aaf869e"
+    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.6/twin_core-0.10.6.tar.gz"
+    sha256 "5371c194ce482b19b81ac07e30647bed4479749911e11f48edcfcce9531ba52e"
   end
 
   def install
     virtualenv_install_with_resources
+    generate_completions_from_executable(bin/"twin", "completion")
   end
 
   def caveats
