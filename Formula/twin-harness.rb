@@ -63,7 +63,8 @@ class TwinHarness < Formula
     # build safe to hand out: their tools say where they went instead.
     assert_match "moved to twin-grade", shell_output("#{bin}/twin-eval selftest 2>&1", 2)
 
-    # And without configuration it asks for it in a sentence, not a traceback.
-    assert_match "twin-identities.json", shell_output("#{bin}/twin-eval 2>&1", 1)
+    # And without configuration it asks for it in a sentence, not a traceback
+    # (exit 2: a setup error, `twin help exit-codes`).
+    assert_match "twin-identities.json", shell_output("#{bin}/twin-eval 2>&1", 2)
   end
 end
