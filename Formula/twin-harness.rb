@@ -6,22 +6,28 @@ class TwinHarness < Formula
   # Assets live in DrizzDev/releases, the same public repo drizz publishes
   # to, so the source repo can stay private. The tag carries the tool name
   # because plain v0.1.x in that repo belongs to drizz.
-  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.2.1/twin_harness-0.2.1.tar.gz"
-  sha256 "37093b5b748096adfe9ced39c1db530002d3e6e23b05cb04627faf31c136ff44"
-  # Proprietary: this is distributed to Drizz customers, not published.
-  license :cannot_represent
+  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.0/twin_harness-0.10.0.tar.gz"
+  sha256 "1b5229fb6750fe63916bffc92bf0d4c9a8bbfb39cc23eb013cd91b04f5c9d575"
+  # Business Source License 1.1: LICENSE and NOTICE inside the tarball.
+  license "BUSL-1.1"
 
-  # The package is standard library only, so this formula has no resources and
-  # nothing to vendor -- the virtualenv exists to keep four commands off the
-  # user's system Python, not to hold dependencies.
-  #
-  # That isolation is the whole reason to ship this through Homebrew rather
-  # than as "pip install". Homebrew Python, Debian 12+, Ubuntu 23.04+ and
-  # Fedora 38+ all refuse a system-wide pip install (PEP 668), and the flag
-  # that overrides them is called --break-system-packages because that is what
-  # it does. A formula sidesteps the argument: brew made that rule and knows
-  # how to live inside it.
+  # Only this tool's own tags: "latest" in DrizzDev/releases is drizz's.
+  livecheck do
+    url :stable
+    regex(/^twin-harness-v?(\d+(?:\.\d+)+)$/i)
+  end
+
+  # The harness and twin-core, the one package it needs (the formats and
+  # helpers it shares with Drizz's grading service), both standard library
+  # only. The virtualenv keeps them off the user's system Python, which
+  # Homebrew Python, Debian 12+, Ubuntu 23.04+ and Fedora 38+ all protect
+  # (PEP 668).
   depends_on "python@3.14"
+
+  resource "twin-core" do
+    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.0/twin_core-0.10.0.tar.gz"
+    sha256 "8115313af7a843e64f482bdb8ec9dde64ac3058bbb55c67e48742ea4592b68bd"
+  end
 
   def install
     virtualenv_install_with_resources
@@ -29,41 +35,34 @@ class TwinHarness < Formula
 
   def caveats
     <<~EOS
-      twin-harness needs two things before its first run:
+      Sign in once; a key for the twin is kept for this machine:
 
-        twin-identities.json   your twin's URL and a token for it
-        .env                   LLM_BASE / LLM_MODEL / LLM_KEY for your agent
+        twin login
 
-      Copy the examples from the installed package and fill them in:
+      Then write the example tests and your agent's model settings:
 
-        twin-test --init
+        twin-test --init       # tests/, .env.example (LLM_BASE / LLM_MODEL / LLM_KEY)
 
-      Worlds and the twin's log of every call (`twin world`, the SDK's
-      world.calls()) need only those. PASS/FAIL verdicts come from a Drizz
-      grading service -- this build does not carry the grading rules -- and
-      need the grading token you were given:
+      PASS/FAIL verdicts come from Drizz's grading service -- this build does
+      not carry the grading rules -- and need the grading token you were given:
 
         export TWIN_GRADE_TOKEN=...
-
-      Ask your Drizz contact for the twin URL, the twin token and that one.
     EOS
   end
 
   test do
-    # The commands exist and run. Both of these print a message and exit 1 --
-    # usage text and a refusal are failures as far as a shell is concerned --
-    # so the expected status is passed explicitly. Leaving it at the default 0
-    # is what made this test fail the first time it ran.
-    assert_match "twin-test", shell_output("#{bin}/twin-test 2>&1", 1)
+    assert_match "twin-test #{version} (twin-core #{version})", shell_output("#{bin}/twin-test --version")
 
-    # And the rules are genuinely absent. This is the property that makes the
-    # build safe to hand out, so it is worth asserting rather than assuming:
-    # a formula built from the wrong tarball would still pass the check above.
-    output = shell_output("#{bin}/twin-eval --selftest 2>&1", 1)
-    assert_match "does not carry the grading rules", output
+    # The example test it writes is valid: the harness reads and checks it
+    # without a twin, a model or a network.
+    system bin/"twin-test", "--init"
+    assert_match "ok", shell_output("#{bin}/twin-test --check tests/move-conflict.md")
 
-    # And it starts up far enough to ask for configuration rather than
-    # crashing: the right first-run experience is a sentence, not a traceback.
+    # The grading rules are genuinely absent -- the property that makes the
+    # build safe to hand out: their tools say where they went instead.
+    assert_match "moved to twin-grade", shell_output("#{bin}/twin-eval selftest 2>&1", 2)
+
+    # And without configuration it asks for it in a sentence, not a traceback.
     assert_match "twin-identities.json", shell_output("#{bin}/twin-eval 2>&1", 1)
   end
 end
