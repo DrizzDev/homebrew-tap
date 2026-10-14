@@ -6,8 +6,8 @@ class TwinHarness < Formula
   # Assets live in DrizzDev/releases, the same public repo drizz publishes
   # to, so the source repo can stay private. The tag carries the tool name
   # because plain v0.1.x in that repo belongs to drizz.
-  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.13/twin_harness-0.10.13.tar.gz"
-  sha256 "b10d47adb460d035b242f7d2edd3f8ab1c45273af2062bb87170d52ee4755051"
+  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.14/twin_harness-0.10.14.tar.gz"
+  sha256 "77a8c4c6bc3c983afc4ae01ccac575da956d327c6b4f9ab513e60352541e2922"
   # Business Source License 1.1: LICENSE and NOTICE inside the tarball.
   license "BUSL-1.1"
 
@@ -25,8 +25,8 @@ class TwinHarness < Formula
   depends_on "python@3.14"
 
   resource "twin-core" do
-    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.13/twin_core-0.10.13.tar.gz"
-    sha256 "f22e7b2f44896cbc7a202b5e86a6aaca38dbab668ffd1ee7e75673fd3c21f429"
+    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.14/twin_core-0.10.14.tar.gz"
+    sha256 "24c839502d5c842f17f5055f13c0a0bd4c73ee682ede208012211477853e917e"
   end
 
   def install
