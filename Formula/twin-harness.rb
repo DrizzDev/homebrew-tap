@@ -6,8 +6,8 @@ class TwinHarness < Formula
   # Assets live in DrizzDev/releases, the same public repo drizz publishes
   # to, so the source repo can stay private. The tag carries the tool name
   # because plain v0.1.x in that repo belongs to drizz.
-  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.14/twin_harness-0.10.14.tar.gz"
-  sha256 "77a8c4c6bc3c983afc4ae01ccac575da956d327c6b4f9ab513e60352541e2922"
+  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.15/twin_harness-0.10.15.tar.gz"
+  sha256 "7d181d3482b20d1deda323381dcb0199d1b548379da522e8021132e9f9c4acc7"
   # Business Source License 1.1: LICENSE and NOTICE inside the tarball.
   license "BUSL-1.1"
 
@@ -25,8 +25,8 @@ class TwinHarness < Formula
   depends_on "python@3.14"
 
   resource "twin-core" do
-    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.14/twin_core-0.10.14.tar.gz"
-    sha256 "24c839502d5c842f17f5055f13c0a0bd4c73ee682ede208012211477853e917e"
+    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.10.15/twin_core-0.10.15.tar.gz"
+    sha256 "5b2652d722be8b93968f823011243af7893524061e9f9ae5ddf6b2c017210a5e"
   end
 
   def install
@@ -36,18 +36,32 @@ class TwinHarness < Formula
 
   def caveats
     <<~EOS
-      Sign in once; a key for the twin is kept for this machine:
+      Sign in once (your browser opens); a key is kept for this machine:
 
         twin login
 
-      Then write the example tests and your agent's model settings:
+      The twins you can make worlds of:
 
-        twin-test --init       # tests/, .env.example (LLM_BASE / LLM_MODEL / LLM_KEY)
+        twin --list
+
+      Write a starter world file (seed.md), two agents to start your own from
+      (agents/) and example tests (tests/) in this folder:
+
+        twin-test --init
+
+      Then make a world from the seed, and run an agent in it:
+
+        twin world create seed.md --folder world
+        twin world run world -- twin-agent "<task>"
 
       PASS/FAIL verdicts come from Drizz's grading service -- this build does
       not carry the grading rules -- and need the grading token you were given:
 
         export TWIN_GRADE_TOKEN=...
+
+      Worlds, agents and the twin's record of calls work without it.
+
+      Docs: https://github.com/DrizzDev/twin-harness#readme
     EOS
   end
 
