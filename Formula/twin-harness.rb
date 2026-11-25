@@ -6,8 +6,8 @@ class TwinHarness < Formula
   # Assets live in DrizzDev/releases, the same public repo drizz publishes
   # to, so the source repo can stay private. The tag carries the tool name
   # because plain v0.1.x in that repo belongs to drizz.
-  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.11.5/twin_harness-0.11.5.tar.gz"
-  sha256 "db637ba1913d5c9fb8e2668ce21cb679e54fc82a12c83d5eb863f6a0400d300e"
+  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.11.6/twin_harness-0.11.6.tar.gz"
+  sha256 "2a4fcb27ea6f88879dd5359a4b40c982dca602fa4d46f0c9e1a5b37598252bdc"
   # Business Source License 1.1: LICENSE and NOTICE inside the tarball.
   license "BUSL-1.1"
 
@@ -62,8 +62,8 @@ class TwinHarness < Formula
   end
 
   resource "twin-core" do
-    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.11.5/twin_core-0.11.5.tar.gz"
-    sha256 "475d8e0226955b7fa379713f489d2a594cfbb63b686b662883c18ef7397ef7af"
+    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.11.6/twin_core-0.11.6.tar.gz"
+    sha256 "58b938a9533d3c236a869f3169fb256a7f053d8a5aedaf0a7040c6e11ca6a59b"
   end
 
   BUILD_TOOLS = %w[hatchling packaging pathspec pluggy tomlkit trove-classifiers].freeze
