@@ -6,8 +6,8 @@ class TwinHarness < Formula
   # Assets live in DrizzDev/releases, the same public repo drizz publishes
   # to, so the source repo can stay private. The tag carries the tool name
   # because plain v0.1.x in that repo belongs to drizz.
-  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.11.4/twin_harness-0.11.4.tar.gz"
-  sha256 "98c024f9a61085a68f8d60400be5fa0c53efa2b41b66b843ecf2e17892fa7d27"
+  url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.11.5/twin_harness-0.11.5.tar.gz"
+  sha256 "db637ba1913d5c9fb8e2668ce21cb679e54fc82a12c83d5eb863f6a0400d300e"
   # Business Source License 1.1: LICENSE and NOTICE inside the tarball.
   license "BUSL-1.1"
 
@@ -62,8 +62,8 @@ class TwinHarness < Formula
   end
 
   resource "twin-core" do
-    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.11.4/twin_core-0.11.4.tar.gz"
-    sha256 "1f0fbcc5a41e3c4ba9a1d03e21408699858a8c4b094f95fc5e88ca916deae670"
+    url "https://github.com/DrizzDev/releases/releases/download/twin-harness-v0.11.5/twin_core-0.11.5.tar.gz"
+    sha256 "475d8e0226955b7fa379713f489d2a594cfbb63b686b662883c18ef7397ef7af"
   end
 
   BUILD_TOOLS = %w[hatchling packaging pathspec pluggy tomlkit trove-classifiers].freeze
@@ -89,32 +89,19 @@ class TwinHarness < Formula
 
   def caveats
     <<~EOS
-      Sign in once (your browser opens); a key is kept for this machine:
+      Get started in 3 steps:
 
-        twin login
+        1. Sign in (your browser opens):
 
-      The twins you can make worlds of:
+             twin login
 
-        twin --list
+        2. See the twins you can use:
 
-      Write a starter world file (seed.md), two agents to start your own from
-      (agents/) and example tests (tests/) in this folder:
+             twin --list
 
-        twin-test --init
+        3. Make your first world and connect your agent, step by step:
 
-      Then make a world from the seed, and run an agent in it:
-
-        twin world create seed.md --folder world
-        twin world run world -- twin-agent "<task>"
-
-      PASS/FAIL verdicts come from Drizz's grading service -- this build does
-      not carry the grading rules -- and need the grading token you were given:
-
-        export TWIN_GRADE_TOKEN=...
-
-      Worlds, agents and the twin's record of calls work without it.
-
-      Docs: https://docs.drizz.dev/twins
+             https://docs.drizz.dev/twins/getting-started/quickstart
     EOS
   end
 
